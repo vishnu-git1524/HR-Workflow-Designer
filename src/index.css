@@ -1,13 +1,286 @@
-body {
+:root {
+  /* Colors */
+  --color-primary: #3b82f6;
+  --color-primary-hover: #2563eb;
+  --color-secondary: #f3f4f6;
+  --color-secondary-hover: #e5e7eb;
+  --color-text-main: #1f2937;
+  --color-text-muted: #6b7280;
+  --color-background: #f9fafb;
+  --color-surface: #ffffff;
+  --color-border: #e5e7eb;
+  
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-error: #ef4444;
+
+  --color-node-start: #dbeafe;
+  --color-node-task: #fef3c7;
+  --color-node-approval: #dcfce7;
+  --color-node-automated: #f3e8ff;
+  --color-node-end: #fee2e2;
+
+  --color-node-start-border: #3b82f6;
+  --color-node-task-border: #f59e0b;
+  --color-node-approval-border: #10b981;
+  --color-node-automated-border: #a855f7;
+  --color-node-end-border: #ef4444;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+
+  /* Typography */
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--color-background);
+  color: var(--color-text-main);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* Base styles */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  color: var(--color-text-main);
+}
+
+p {
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
+}
+
+input, select, textarea {
+  font-family: inherit;
+}
+
+.premium-btn {
+  background-color: var(--color-primary);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  font-weight: 500;
+  transition: all 0.2s;
+  box-shadow: var(--shadow-sm);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.premium-btn:hover {
+  background-color: var(--color-primary-hover);
+  box-shadow: var(--shadow-md);
+}
+
+.premium-btn.secondary {
+  background-color: var(--color-secondary);
+  color: var(--color-text-main);
+  border: 1px solid var(--color-border);
+}
+
+.premium-btn.secondary:hover {
+  background-color: var(--color-secondary-hover);
+}
+
+.premium-input {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.375rem;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  background-color: var(--color-surface);
+  color: var(--color-text-main);
+}
+
+.premium-input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Custom Node Styles */
+.custom-node {
+  padding: 15px;
+  border-radius: 8px;
+  background-color: var(--color-surface);
+  border: 2px solid var(--color-border);
+  min-width: 150px;
+  box-shadow: var(--shadow-md);
+  transition: all 0.2s ease;
+}
+
+.custom-node:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+
+.custom-node.selected {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+.custom-node-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  margin-bottom: 8px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.custom-node-content {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+/* Specific Node Colors */
+.custom-node.start-node {
+  background-color: var(--color-node-start);
+  border-color: var(--color-node-start-border);
+}
+
+.custom-node.task-node {
+  background-color: var(--color-node-task);
+  border-color: var(--color-node-task-border);
+}
+
+.custom-node.approval-node {
+  background-color: var(--color-node-approval);
+  border-color: var(--color-node-approval-border);
+}
+
+.custom-node.automated-node {
+  background-color: var(--color-node-automated);
+  border-color: var(--color-node-automated-border);
+}
+
+.custom-node.end-node {
+  background-color: var(--color-node-end);
+  border-color: var(--color-node-end-border);
+}
+
+/* Layout Utilities */
+.app-container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 250px;
+  background-color: var(--color-surface);
+  border-right: 1px solid var(--color-border);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  box-shadow: var(--shadow-sm);
+  z-index: 10;
+}
+
+.sidebar h2 {
+  font-size: 1.125rem;
+  margin-bottom: 0.5rem;
+}
+
+.dnd-node {
+  padding: 0.75rem 1rem;
+  border-radius: 0.375rem;
+  border: 1px solid var(--color-border);
+  background-color: var(--color-surface);
+  cursor: grab;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.dnd-node:hover {
+  border-color: var(--color-primary);
+  background-color: var(--color-secondary);
+}
+
+.dnd-node:active {
+  cursor: grabbing;
+}
+
+.canvas-area {
+  flex: 1;
+  position: relative;
+  height: 100%;
+}
+
+.properties-panel {
+  width: 300px;
+  background-color: var(--color-surface);
+  border-left: 1px solid var(--color-border);
+  padding: 1rem;
+  overflow-y: auto;
+  box-shadow: var(--shadow-sm);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.properties-panel h3 {
+  font-size: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--color-text-main);
+}
+
+/* React Flow overrrides */
+.react-flow__handle {
+  width: 8px;
+  height: 8px;
+  background-color: var(--color-primary);
+  border: 2px solid white;
+}
+
+.react-flow__handle-left {
+  left: -5px;
+}
+
+.react-flow__handle-right {
+  right: -5px;
+}
+
+.react-flow__attribution {
+  display: none;
 }
